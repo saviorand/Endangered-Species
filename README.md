@@ -1,2 +1,17 @@
 # Endangered Species
+
  A test exercise from BIM meant to retrieve endangered species and mammal endangered species from IUCN Red Book database via API
+
+## Technologies
+
+Made with React and Tailwind CSS.
+
+## Design Choices
+
+Because the API token requested from IUCN is still pending (it seems that they take a while to respond to requests) I have used test responses provided in API documentation.
+
+Since only Europe is available in test regions, Europe is used for now. A random region is still retrieved - it will be integrated with the app once production API token is provided.
+
+## Made with
+
+    IUCN 2019. IUCN Red List of Threatened Species. Version 2019-3 <www.iucnredlist.org>
