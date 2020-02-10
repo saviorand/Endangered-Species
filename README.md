@@ -4,6 +4,18 @@
 
 ## Usage
 
+Clone the repository to your preferred location or local machine with:
+
+    git clone https://github.com/saviorand/Endangered-Species.git
+
+Open the directory:
+
+    cd Endangered-Species
+
+Install the dependencies:
+
+    yarn install
+
 To run the app on the localhost: 
 
     yarn start
