@@ -2,9 +2,18 @@
 
  A test exercise from BIM meant to retrieve endangered species and mammal endangered species from IUCN Red Book database via API
 
+## Usage
+
+To run the app on the localhost: 
+    yarn start
+
+To prepare a production-ready, optimized build of the app:
+    npm run build
+
 ## Technologies
 
 Made with React and Tailwind CSS.
+Simple in-browser window.fetch interface is used to retrieve data.
 
 ## Design Choices
 
