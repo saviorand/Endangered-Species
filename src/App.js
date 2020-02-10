@@ -1,7 +1,6 @@
 import React from 'react';
+
 import Endangered from './components/species';
-
-
 
 
 class App extends React.Component {
@@ -12,8 +11,10 @@ class App extends React.Component {
     this.state = {  
     regions: [],
     species: [],
-    myArray: [],
-    Posts: []
+    measures: [],
+    measuresMammals: [],
+    Posts: [],
+    PostsMammals: []
 
   };
 
@@ -34,6 +35,7 @@ class App extends React.Component {
 
 
   // Fetch specie list and store it in the state, filter the list by critically endangered species
+   // Include a list of species filtered by critically endangered mammals
 
     fetch('http://apiv3.iucnredlist.org/api/v3/species/region/europe/page/0?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee')
     .then(res => res.json())
@@ -42,26 +44,32 @@ class App extends React.Component {
       let specieData = data['result'].filter(item => {
          return item['category'] === 'CR'
       });
-     
 
+      let mammalsData = specieData.filter(item => {
+         return item['class_name'] === 'MAMMALIA'
+      });
 
       let myMeasures = [];
 
       myMeasures = specieData.slice(0,2)
       //[0]['taxonid'];
 
-      
+      let myMeasuresMammals = [];
+
+      myMeasuresMammals = mammalsData.slice(0,2)
+
+
 
       this.setState({species: data['result'],
-                    myArray: myMeasures
+                     mammals: mammalsData,
+                     measures: myMeasures,
+                     measuresMammals: myMeasuresMammals
     });
 
 
   // Fetch conservation measures for all critically endangered species and store them in the state
 
-     //
-
-      this.state.myArray.map(entry => {
+      this.state.measures.map(entry => {
 
        fetch('http://apiv3.iucnredlist.org/api/v3/measures/species/id/' + entry.taxonid + '/region/europe?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee')
         .then(res => res.json())
@@ -75,13 +83,39 @@ class App extends React.Component {
 
         };
 
+
       this.setState({
       Posts: [...this.state.Posts, conservationMeasure]
-      
     })
     
     })
     .catch(console.log) 
+
+
+     // Include conservation measures for critically endangered mammals
+
+      this.state.measuresMammals.map(entry => {
+
+       fetch('http://apiv3.iucnredlist.org/api/v3/measures/species/id/' + entry.taxonid + '/region/europe?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee')
+        .then(res => res.json())
+        .then((data) => {
+      
+      let consMeasureMammals = [];
+
+      for (let i = 0; i < data['result'].length; i++){
+       
+        consMeasureMammals.push(data['result'][i]['title']);
+
+        };
+
+
+      this.setState({
+      PostsMammals: [...this.state.PostsMammals, consMeasureMammals]
+    })
+    
+    })
+    .catch(console.log) 
+    })
 
       })
 
@@ -91,21 +125,7 @@ class App extends React.Component {
     .catch(console.log)
 
 
-
-//   fetch('http://apiv3.iucnredlist.org/api/v3/measures/species/id/' + id + '/region/europe?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee')
-//   .then(res => res.json())
-//   .then((data) => {
-
-//      this.setState({
-//      Posts: data['result'][0]['title']
-      
-//    });
-//    })
-//    .catch(console.log) 
-    
   };
-
-  
   
   render (){
 
@@ -118,7 +138,8 @@ class App extends React.Component {
       
       <div className="max-w-md bg-white shadow-md rounded mx-auto my-8 p-8">
             
-      <Endangered Posts={this.state.Posts} myArray={this.state.myArray} 
+      <Endangered Posts={this.state.Posts} PostsMammalsOnly={this.state.PostsMammals}
+      measures={this.state.measures} measuresMammalsOnly={this.state.measuresMammals} 
       species={this.state.species} regions={this.state.regions} />
 
       </div>

@@ -1,15 +1,9 @@
 import React from 'react';
 
-const Endangered = ({ Posts, myArray, species, regions }) => {
+const Endangered = ({ Posts, PostsMammalsOnly, measures, measuresMammalsOnly, species, regions }) => {
 
       return (
 
-// {species.map((specie) => (
-  //       <div className="p-8">
-    //          <h3 className="text-lg">{specie.scientific_name}</h3>
-    //         <p>{specie.taxonid}</p>
-    //    </div>
-    // ))}
 
       	<div>
         <div>
@@ -27,7 +21,7 @@ const Endangered = ({ Posts, myArray, species, regions }) => {
           <center><h2 className="text-xl my-8">Species list</h2></center>
           <center><h3 className="text-lg my-8">Critically endangered species, all classes</h3></center>
 
-           {myArray.map((item, i) => (
+           {measures.map((item, i) => (
            <div>
             <p>{item.taxonid}</p>
             <p>{item.scientific_name}</p>
@@ -37,7 +31,13 @@ const Endangered = ({ Posts, myArray, species, regions }) => {
 
           <center><h3 className="text-lg my-8">Critically endangered species, mammals only</h3></center>
 
-
+            {measuresMammalsOnly.map((item, i) => (
+           <div>
+            <p>{item.taxonid}</p>
+            <p>{item.scientific_name}</p>
+            <p>{PostsMammalsOnly[i]}</p>
+           </div>
+           ))}
            
            
 
