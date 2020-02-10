@@ -25,7 +25,7 @@ const Endangered = ({ Posts, PostsMammalsOnly, measures, measuresMammalsOnly, sp
            <div>
             <p>{item.taxonid}</p>
             <p>{item.scientific_name}</p>
-            <p>{Posts[i]}</p>
+            <p>{Posts[i] + ' '}</p>
            </div>
            ))}
 
@@ -35,7 +35,7 @@ const Endangered = ({ Posts, PostsMammalsOnly, measures, measuresMammalsOnly, sp
            <div>
             <p>{item.taxonid}</p>
             <p>{item.scientific_name}</p>
-            <p>{PostsMammalsOnly[i]}</p>
+            <p>{PostsMammalsOnly[i] + ' '}</p>
            </div>
            ))}
            
