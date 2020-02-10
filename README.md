@@ -5,9 +5,11 @@
 ## Usage
 
 To run the app on the localhost: 
+
     yarn start
 
 To prepare a production-ready, optimized build of the app:
+
     npm run build
 
 ## Technologies
